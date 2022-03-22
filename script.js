@@ -70,16 +70,26 @@ nextQuestion.addEventListener("click", () => {
   displayOptions();
 });
 
-var timerInterval = setInterval(function () {
-  secondsLeft--;
-  console.log(secondsLeft);
-  timeEl.textContent = countDown + " secondsLeft to next answer.";
-
-  if (secondsLeft === 0) {
-    clearInterval(timerInterval);
-    sendMessage();
+const countdownEL = document.getElementById("countdown");
+setInterval(updatedCountdown, 1000);
+// is the function called updatedCountdown that takes seconds as argument:
+function updatedCountdown() {
+  let seconds = time % 60;
+  countdownEL.innerHTML = `${seconds}`;
+  time--;
+  //if statement that executes it  when the counter is less than 0:
+  if (time < 0) {
+    clearInterval(startingMinutes);
+    console.log("Ding! Time is UP");
   }
-}, 6000);
+}
+
+if (secondsLeft === 0) {
+  clearInterval(timerInterval);
+  sendMessage();
+  6000;
+}
+
 function displayOptions() {
   answerText.innerHTML = ""; //empty and create new button each time
   var buttonA = document.createElement("button");
